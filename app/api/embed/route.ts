@@ -7,6 +7,10 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export async function POST(req: Request) {
   const { text } = await req.json();
 
+  if (!text) {
+    return NextResponse.json({ success: false, error: "Text is required" });
+  }
+
   // 1. Get embedding from OpenAI
   const embedding = await openai.embeddings.create({
     model: "text-embedding-3-small",
@@ -27,5 +31,5 @@ export async function POST(req: Request) {
     },
   ]);
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, });
 }
