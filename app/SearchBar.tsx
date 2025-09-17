@@ -1,9 +1,18 @@
 "use client";
 import { useState } from "react";
 
+interface SearchResult {
+    id: string;
+    values: number[];
+    metadata: {
+        text: string;
+    };
+    score: number;
+}
+
 export const SearchBar = () => {
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState<any[]>([]);
+    const [results, setResults] = useState<SearchResult[]>([]);
 
     const handleSearch = async() => {
         const response = await fetch("/api/search", {
