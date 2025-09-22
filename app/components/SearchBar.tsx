@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { SearchResults } from "./SearchResults";
 import { ResultItemType } from "./SearchResults";
-import { searchMovies, fetchAllMovies } from "../api/request";
+import { searchMovies, fetchAllMovies } from "../api/pinecone/request";
 
 
 
