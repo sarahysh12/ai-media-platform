@@ -1,23 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
+
+import { searchMovies } from "../api/pinecone/request";
 import { SearchResults } from "./SearchResults";
 import { ResultItemType } from "./SearchResults";
-import { searchMovies, fetchAllMovies } from "../api/request";
-
-
 
 export const SearchBar = () => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<ResultItemType[]>([]);
     const [isRequestPending, setIsRequestPending] = useState(false);
 
-
      useEffect(() => {
        searchMovies('give me 10 random movies').then(data => {
          setResults(data)
        })
      }, [])
-
 
      const handleSearch = async () => {
        setIsRequestPending(true);
@@ -30,8 +27,6 @@ export const SearchBar = () => {
          setIsRequestPending(false);
        }
      }
-
-
 
   return (
     <div>

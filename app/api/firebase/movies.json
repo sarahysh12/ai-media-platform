@@ -1,0 +1,123 @@
+[
+    {
+      "id": "1758038078923",
+      "title": "WALL·E",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/walle.jpeg",
+      "description": "In a distant future, a small waste-collecting robot inadvertently embarks on a space journey that will decide the fate of mankind.",
+      "year": 2008,
+      "rating": 8.4
+    },
+    {
+      "id": "1758038248328",
+      "title": "Leon: The Professional",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/leon.jpeg",
+      "description": "A professional hitman reluctantly takes in a 12-year-old girl after her family is murdered, forming an unlikely bond.",
+      "year": 1994,
+      "rating": 8.5
+    },
+    {
+      "id": "1758038040895",
+      "title": "Spider-Man: No Way Home",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/spiderman.jpeg",
+      "description": "With Spider-Man's identity revealed, Peter Parker seeks Doctor Strange’s help, leading to chaos in the multiverse.",
+      "year": 2021,
+      "rating": 8.3
+    },
+    {
+      "id": "1758038127328",
+      "title": "Everything Everywhere All at Once",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/enverythingeverywhereonce.webp",
+      "description": "An aging laundromat owner discovers she must connect with versions of herself across parallel universes to save reality.",
+      "year": 2022,
+      "rating": 8.1
+    },
+    {
+      "id": "1758038152932",
+      "title": "The Good, the Bad and the Ugly",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/goodbadugly.jpg",
+      "description": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in buried gold.",
+      "year": 1966,
+      "rating": 8.8
+    },
+    {
+      "id": "1758038126381",
+      "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/drstrangelove.jpeg",
+      "description": "An unhinged general triggers a nuclear crisis that only a war room full of politicians and generals can (maybe) stop.",
+      "year": 1964,
+      "rating": 8.4
+    },
+    {
+      "id": "1758038280827",
+      "title": "O Brother, Where Art Thou?",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/obrother.jpeg",
+      "description": "In 1930s Mississippi, three escaped convicts search for hidden treasure while being pursued by the law.",
+      "year": 2000,
+      "rating": 7.7
+    },
+    {
+      "id": "1758038139771",
+      "title": "Amélie",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/amelie.jpeg",
+      "description": "A shy waitress in Paris sets out to improve the lives of those around her while grappling with her own isolation.",
+      "year": 2001,
+      "rating": 8.3
+    },
+    {
+      "id": "1758037955640",
+      "title": "Se7en",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/seven.jpeg",
+      "description": "Two detectives hunt a serial killer who uses the seven deadly sins as his motives.",
+      "year": 1995,
+      "rating": 8.6
+    },
+    {
+      "id": "1758038302773",
+      "title": "Kill Bill: Vol. 1",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/killbill.jpeg",
+      "description": "After awakening from a four-year coma, a former assassin seeks revenge on her ex-colleagues who betrayed her.",
+      "year": 2003,
+      "rating": 8.2
+    },
+    {
+      "id": "1758038229320",
+      "title": "La La Land",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/lalaland.jpeg",
+      "description": "A jazz musician and an aspiring actress fall in love while pursuing their dreams in Los Angeles.",
+      "year": 2016,
+      "rating": 8.0
+    },
+    {
+      "id": "1758038140537",
+      "title": "Crouching Tiger, Hidden Dragon",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/crouchingtiger.jpeg",
+      "description": "A young warrior steals a legendary sword, setting off a chain of events involving forbidden love and betrayal.",
+      "year": 2000,
+      "rating": 7.9
+    },
+    {
+      "id": "1758038258503",
+      "title": "12 Angry Men",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/12angrymen.jpeg",
+      "description": "A lone juror attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.",
+      "year": 1957,
+      "rating": 9.0
+    },
+    {
+      "id": "1758038138905",
+      "title": "Star Wars: Episode V - The Empire Strikes Back",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/starwars.jpg",
+      "description": "The Rebels face attacks from the Empire while Luke Skywalker trains with Jedi Master Yoda to confront Darth Vader.",
+      "year": 1980,
+      "rating": 8.7
+    },
+    {
+      "id": "1758038203167",
+      "title": "2001: A Space Odyssey",
+      "thumbnailUrl": "https://cb69a16f32373d5d6ad33a48a7a924eb.r2.cloudflarestorage.com/ai-media-platform-r2/tile-images/spaceodyssey.jpeg",
+      "description": "A voyage to Jupiter with a sentient computer, HAL 9000, explores humanity’s place in the cosmos.",
+      "year": 1968,
+      "rating": 8.3
+    }
+  ]
+  

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { getPineconeClient } from "@/lib/pinecone";
 import OpenAI from "openai";
+
+import { getPineconeClient } from "@/lib/pinecone";
 
 const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
