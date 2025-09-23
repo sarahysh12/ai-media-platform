@@ -1,8 +1,9 @@
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db } from "../../../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { getDownloadURL,ref, uploadBytes } from "firebase/storage";
 
-async function uploadImage(file: File, movieTitle: string) {
+import { db,storage } from "../../../lib/firebase";
+
+export async function uploadImage(file: File, movieTitle: string) {
   const storageRef = ref(storage, `movies/${file.name}`);
   await uploadBytes(storageRef, file);
   

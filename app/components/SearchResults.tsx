@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 
 export interface ResultItemType {
     id: string;
@@ -8,8 +8,7 @@ export interface ResultItemType {
         image: string;
     };
     score: number;
-  }
-  
+}
 
 export interface SearchResultType {
     data?: ResultItemType[]
@@ -24,7 +23,7 @@ export const SearchResults = ({data}: SearchResultType) => {
                 key={idx}
                 className="rounded-xl overflow-hidden shadow hover:scale-105 transition-transform duration-300"
                 >
-                <img
+                <Image
                     src={item?.metadata.image}
                     alt={item?.metadata.text}
                     className="w-full h-56 object-cover"
