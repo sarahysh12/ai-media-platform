@@ -11,15 +11,19 @@ export async function GET() {
 
   do {
     const listed = await index.listPaginated({ limit: 100, paginationToken });
-    const ids = listed.vectors?.map((v: unknown) => v.id);
+    const ids = (listed.vectors ?? [])
+      .map((v: { id?: string }) => v.id)
+      .filter((id): id is string => Boolean(id));
 
     if (ids?.length && ids.length > 0) {
       const fetched = await index.fetch(ids);
 
-      Object.entries(fetched.records || {}).forEach(([id, vector]: unknown) => {
-        const { text, image } = vector.metadata || {};
-        allRecords.push({ id, text, image });
-      });
+      Object.entries(fetched.records || {}).forEach(
+        ([id, vector]: [string, { metadata?: { text?: string; image?: string } }]) => {
+          const { text, image } = vector.metadata || {};
+          allRecords.push({ id, text, image });
+        }
+      );
     }
 
     paginationToken = listed.pagination?.next;

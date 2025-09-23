@@ -1,5 +1,3 @@
-
-
 export const searchMovies = async(query: string) => {
     try {
       const response = await fetch("/api/search", {
