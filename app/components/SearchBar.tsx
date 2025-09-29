@@ -11,7 +11,7 @@ export const SearchBar = () => {
     const [isRequestPending, setIsRequestPending] = useState(false);
 
      useEffect(() => {
-       searchMovies('give me 10 random movies').then(data => {
+       searchMovies('give me 10 random movies', 10).then(data => {
          setResults(data)
        })
      }, [])
@@ -19,7 +19,7 @@ export const SearchBar = () => {
      const handleSearch = async () => {
        setIsRequestPending(true);
        try {
-         const data = await searchMovies(query);
+         const data = await searchMovies(query, 10);
          setResults(data);
        } catch (error) {
          console.error('Search failed:', error);

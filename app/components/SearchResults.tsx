@@ -5,7 +5,9 @@ export interface ResultItemType {
     values: number[];
     metadata: {
         text: string;
-        image: string;
+        uuid: string;
+        // image?: string;
+        // thumbnailUrl?: string;
     };
     score: number;
 }
@@ -24,8 +26,10 @@ export const SearchResults = ({data}: SearchResultType) => {
                 className="rounded-xl overflow-hidden shadow hover:scale-105 transition-transform duration-300"
                 >
                 <Image
-                    src={item?.metadata.image}
+                    src={`/${item?.metadata.uuid}.jpeg`}
                     alt={item?.metadata.text}
+                    width={300}
+                    height={224}
                     className="w-full h-56 object-cover"
                 />
                 <div className="p-2 bg-gray-900 text-white">

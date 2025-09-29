@@ -1,9 +1,13 @@
-import { applicationDefault,initializeApp } from 'firebase-admin/app';
+import { cert, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import fs from "fs";
+import path from "path";
+
+// Load service account
+const serviceAccount = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'service-account.json'), 'utf8'));
 
 initializeApp({
-  credential: applicationDefault(),
+  credential: cert(serviceAccount),
 });
 
 const db = getFirestore();

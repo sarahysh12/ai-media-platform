@@ -1,9 +1,9 @@
 
-export const searchMovies = async(query: string) => {
+export const searchMovies = async(query: string, limit: number = 5) => {
     try {
-      const response = await fetch("/api/search", {
+      const response = await fetch("/api/pinecone/search", {
           method: 'POST',
-          body: JSON.stringify({ query }),
+          body: JSON.stringify({ query, limit }),
           headers: {
               'Content-Type': 'application/json',
           }
