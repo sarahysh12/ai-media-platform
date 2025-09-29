@@ -19,9 +19,9 @@ export async function GET() {
       const fetched = await index.fetch(ids);
 
       Object.entries(fetched.records || {}).forEach(
-        ([id, vector]: [string, { metadata?: { text?: string; image?: string } }]) => {
-          const { text, image } = vector.metadata || {};
-          allRecords.push({ id, text, image });
+        ([id, vector]: [string, { metadata?: { text?: string; uuid?: string } }]) => {
+          const { text, uuid } = vector.metadata || {};
+          allRecords.push({ id, text, uuid });
         }
       );
     }

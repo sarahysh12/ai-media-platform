@@ -6,7 +6,7 @@ import { getPineconeClient } from "@/lib/pinecone";
 const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
 export async function POST(req: Request) {
-    const { query } = await req.json();
+    const { query, limit = 5, minScore = 0.23 } = await req.json();
 
     if (!query) {
         return NextResponse.json({ success: false, error: "Query is required" });
@@ -26,9 +26,12 @@ export async function POST(req: Request) {
 
     const results = await index.query({
         vector: vector,
-        topK: 5,
+        topK: limit,
         includeMetadata: true,
     });
 
-    return NextResponse.json(results.matches);
+    // Filter results by similarity score
+    const filteredResults = results.matches?.filter(match => (match?.score ?? 0) > minScore) || [];
+
+    return NextResponse.json(filteredResults);
 }
