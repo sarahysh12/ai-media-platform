@@ -43,15 +43,18 @@ export const SearchResults = ({data}: SearchResultType) => {
                 key={idx}
                 className="rounded-xl overflow-hidden shadow hover:scale-105 transition-transform duration-300"
                 >
-                    <Image
-                    src={
-                        firestoreMap[item?.metadata.uuid]?.thumbnailUrl ?? `/${item?.metadata.uuid}.jpeg`
-                    }
-                    alt={item?.metadata.text}
-                    width={300}
-                    height={224}
-                    className="w-full h-56 object-cover"
-                />
+                    <div className="relative w-full h-56">
+                        <Image
+                        src={
+                            firestoreMap[item?.metadata.uuid]?.thumbnailUrl ?? `/${item?.metadata.uuid}.jpeg`
+                        }
+                        alt={item?.metadata.text}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                        priority={idx < 4}
+                        className="object-cover"
+                    />
+                    </div>
                 <div className="p-2 bg-gray-900 text-white">
                     <p className="font-semibold text-sm truncate">{item?.metadata.text}</p>
                     <p className="text-xs text-gray-400">Rating: {firestoreMap[item?.metadata.uuid]?.rating ?? "N/A"}</p>
