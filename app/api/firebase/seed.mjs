@@ -4,10 +4,11 @@ import fs from "fs";
 import path from "path";
 
 // Load service account
-const serviceAccount = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'service-account.json'), 'utf8'));
+const serviceAccount = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'app/api/firebase/service-account.json'), 'utf8'));
 
 initializeApp({
   credential: cert(serviceAccount),
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
 });
 
 const db = getFirestore();

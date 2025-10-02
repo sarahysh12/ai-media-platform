@@ -24,12 +24,16 @@ export const SearchResults = ({data}: SearchResultType) => {
     const uuids = useMemo(() => (data ?? []).map(item => item.metadata.uuid).filter(Boolean), [data]);
 
     useEffect(() => {
+        
         if (!uuids.length) {
             setFirestoreMap({});
             return;
         }
-        fetchMoviesByIds(uuids).then(setFirestoreMap).catch(() => setFirestoreMap({}));
-    }, [uuids]);
+        fetchMoviesByIds(uuids).then(setFirestoreMap).catch((error) => {
+            console.error('Error fetching Firestore data:', error);
+            setFirestoreMap({});
+        });
+    }, [uuids, data]);
 
     return (
         <div className="mt-4">
@@ -39,9 +43,9 @@ export const SearchResults = ({data}: SearchResultType) => {
                 key={idx}
                 className="rounded-xl overflow-hidden shadow hover:scale-105 transition-transform duration-300"
                 >
-                <Image
+                    <Image
                     src={
-                        firestoreMap[item?.metadata.uuid]?.thumbnailUrl ?? ''
+                        firestoreMap[item?.metadata.uuid]?.thumbnailUrl ?? `/${item?.metadata.uuid}.jpeg`
                     }
                     alt={item?.metadata.text}
                     width={300}
@@ -51,6 +55,7 @@ export const SearchResults = ({data}: SearchResultType) => {
                 <div className="p-2 bg-gray-900 text-white">
                     <p className="font-semibold text-sm truncate">{item?.metadata.text}</p>
                     <p className="text-xs text-gray-400">Rating: {firestoreMap[item?.metadata.uuid]?.rating ?? "N/A"}</p>
+                    <p className="text-xs text-gray-400">Year: {firestoreMap[item?.metadata.uuid]?.year ?? "N/A"}</p>
                 </div>
                 </li>
             ))}
