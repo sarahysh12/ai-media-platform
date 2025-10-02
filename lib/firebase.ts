@@ -4,12 +4,12 @@ import { collection, documentId, getDocs, getFirestore, query, where } from "fir
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  appId: process.env.FIREBASE_APP_ID,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -20,7 +20,6 @@ export interface FirestoreMovieDoc {
   id: string;
   title: string;
   thumbnailUrl?: string;
-  imageUrl?: string;
   rating?: number;
   year?: number;
   description?: string;
@@ -31,7 +30,6 @@ const movieConverter: FirestoreDataConverter<FirestoreMovieDoc> = {
     return {
       title: movie.title,
       thumbnailUrl: movie.thumbnailUrl,
-      imageUrl: movie.imageUrl,
       rating: movie.rating,
       year: movie.year,
       description: movie.description,
@@ -43,7 +41,6 @@ const movieConverter: FirestoreDataConverter<FirestoreMovieDoc> = {
       id: snapshot.id,
       title: data.title,
       thumbnailUrl: data.thumbnailUrl ?? data.imageUrl,
-      imageUrl: data.imageUrl,
       rating: data.rating,
       year: data.year,
       description: data.description,
@@ -55,22 +52,45 @@ export async function fetchMoviesByIds(ids: string[]): Promise<Record<string, Fi
   if (!ids || ids.length === 0) return {};
 
   const uniqueIds = Array.from(new Set(ids)).filter(Boolean);
-  const moviesRef = collection(db, "movies").withConverter(movieConverter);
+  
+  // First, let's test the connection and see what collections exist
+  try {
+    const moviesRef = collection(db, "movies").withConverter(movieConverter);
+    const testQuery = query(moviesRef);
 
+  } catch (error) {
+    console.error('❌ Firestore connection failed:', error);
+    return {};
+  }
+  
+  const moviesRef = collection(db, "movies").withConverter(movieConverter);
   const batches: string[][] = [];
   for (let i = 0; i < uniqueIds.length; i += 10) {
     batches.push(uniqueIds.slice(i, i + 10));
   }
-
+  
   const idToDoc: Record<string, FirestoreMovieDoc> = {};
 
   for (const batch of batches) {
-    const q = query(moviesRef, where(documentId(), "in", batch));
-    const snapshot = await getDocs(q);
-    snapshot.forEach((docSnap) => {
-      const doc = docSnap.data();
-      idToDoc[docSnap.id] = doc;
-    });
+    try {
+      const q = query(moviesRef, where(documentId(), "in", batch));
+      const snapshot = await getDocs(q);
+      
+      if (snapshot.size === 0) {
+        
+        // Let's try to see what documents actually exist
+        const allDocsQuery = query(moviesRef);
+        const allDocsSnapshot = await getDocs(allDocsQuery);
+        const allDocIds = allDocsSnapshot.docs.map(doc => doc.id);
+        
+      }
+      
+      snapshot.forEach((docSnap) => {
+        idToDoc[docSnap.id] = docSnap.data();
+      });
+    } catch (error) {
+      console.error('Error fetching batch:', batch, error);
+    }
   }
 
   return idToDoc;
