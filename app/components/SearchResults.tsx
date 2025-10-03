@@ -1,8 +1,9 @@
 "use client";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
 import { fetchMoviesByIds, FirestoreMovieDoc } from "../../lib/firebase";
+import { MovieCard } from "./MovieCard";
 
 export interface ResultItemType {
     id: string; 
@@ -19,50 +20,52 @@ export interface SearchResultType {
 }
 
 export const SearchResults = ({data}: SearchResultType) => {
-    const [firestoreMap, setFirestoreMap] = useState<Record<string, FirestoreMovieDoc>>({});
+  const [firestoreMap, setFirestoreMap] = useState<Record<string, FirestoreMovieDoc>>({});
 
-    const uuids = useMemo(() => (data ?? []).map(item => item.metadata.uuid).filter(Boolean), [data]);
+  const uuids = useMemo(() => (data ?? []).map(item => item.metadata.uuid).filter(Boolean), [data]);
 
-    useEffect(() => {
+  useEffect(() => {
         
-        if (!uuids.length) {
-            setFirestoreMap({});
-            return;
-        }
-        fetchMoviesByIds(uuids).then(setFirestoreMap).catch((error) => {
-            console.error('Error fetching Firestore data:', error);
-            setFirestoreMap({});
-        });
-    }, [uuids, data]);
+    if (!uuids.length) {
+      setFirestoreMap({});
+      return;
+    }
+    fetchMoviesByIds(uuids).then(setFirestoreMap).catch((error) => {
+      console.error('Error fetching Firestore data:', error);
+      setFirestoreMap({});
+    });
+  }, [uuids, data]);
 
-    return (
-        <div className="mt-4">
-           <ul className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {data?.map((item, idx) => (
-                <li
-                key={idx}
-                className="rounded-xl overflow-hidden shadow hover:scale-105 transition-transform duration-300"
-                >
-                    <div className="relative w-full h-56">
-                        <Image
-                        src={
-                            firestoreMap[item?.metadata.uuid]?.thumbnailUrl ?? `/${item?.metadata.uuid}.jpeg`
-                        }
-                        alt={item?.metadata.text}
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                        priority={idx < 4}
-                        className="object-cover"
-                    />
-                    </div>
-                <div className="p-2 bg-gray-900 text-white">
-                    <p className="font-semibold text-sm truncate">{item?.metadata.text}</p>
-                    <p className="text-xs text-gray-400">Rating: {firestoreMap[item?.metadata.uuid]?.rating ?? "N/A"}</p>
-                    <p className="text-xs text-gray-400">Year: {firestoreMap[item?.metadata.uuid]?.year ?? "N/A"}</p>
-                </div>
-                </li>
-            ))}
-            </ul>
-        </div>
-    )
+  return (
+    <div className="mt-4">
+      <motion.ul
+        className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: { opacity: 0 },
+          show: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.1, // delay each li
+            },
+          },
+        }}
+      >
+        {data?.map((item, idx) => (
+          <motion.li
+            key={idx}
+            className="rounded-xl overflow-hidden shadow hover:scale-105 transition-transform duration-300"
+            variants={{
+              hidden: { opacity: 0, y: 20, scale: 0.95 },
+              show: { opacity: 1, y: 0, scale: 1 },
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+          >
+            <MovieCard item={item} index={idx} firestoreMap={firestoreMap} />
+          </motion.li>
+        ))}
+      </motion.ul>
+    </div>
+  )
 }
