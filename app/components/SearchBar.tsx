@@ -6,27 +6,27 @@ import { SearchResults } from "./SearchResults";
 import { ResultItemType } from "./SearchResults";
 
 export const SearchBar = () => {
-    const [query, setQuery] = useState("");
-    const [results, setResults] = useState<ResultItemType[]>([]);
-    const [isRequestPending, setIsRequestPending] = useState(false);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<ResultItemType[]>([]);
+  const [isRequestPending, setIsRequestPending] = useState(false);
 
-     useEffect(() => {
-       searchMovies('give me 10 random movies', 10).then(data => {
-         setResults(data)
-       })
-     }, [])
+  useEffect(() => {
+    searchMovies('give me 10 random movies', 10).then(data => {
+      setResults(data)
+    })
+  }, [])
 
-     const handleSearch = async () => {
-       setIsRequestPending(true);
-       try {
-         const data = await searchMovies(query, 10);
-         setResults(data);
-       } catch (error) {
-         console.error('Search failed:', error);
-       } finally {
-         setIsRequestPending(false);
-       }
-     }
+  const handleSearch = async () => {
+    setIsRequestPending(true);
+    try {
+      const data = await searchMovies(query, 10);
+      setResults(data);
+    } catch (error) {
+      console.error('Search failed:', error);
+    } finally {
+      setIsRequestPending(false);
+    }
+  }
 
   return (
     <div>

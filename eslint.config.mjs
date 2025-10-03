@@ -18,6 +18,7 @@ const eslintConfig = [
       "simple-import-sort": simpleImportSort,
     },
     rules: {
+      indent: ["error", 2], // 2 spaces
       // ✅ Import sorting
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",

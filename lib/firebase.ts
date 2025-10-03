@@ -53,16 +53,6 @@ export async function fetchMoviesByIds(ids: string[]): Promise<Record<string, Fi
 
   const uniqueIds = Array.from(new Set(ids)).filter(Boolean);
   
-  // First, let's test the connection and see what collections exist
-  try {
-    const moviesRef = collection(db, "movies").withConverter(movieConverter);
-    const testQuery = query(moviesRef);
-
-  } catch (error) {
-    console.error('❌ Firestore connection failed:', error);
-    return {};
-  }
-  
   const moviesRef = collection(db, "movies").withConverter(movieConverter);
   const batches: string[][] = [];
   for (let i = 0; i < uniqueIds.length; i += 10) {
@@ -75,15 +65,6 @@ export async function fetchMoviesByIds(ids: string[]): Promise<Record<string, Fi
     try {
       const q = query(moviesRef, where(documentId(), "in", batch));
       const snapshot = await getDocs(q);
-      
-      if (snapshot.size === 0) {
-        
-        // Let's try to see what documents actually exist
-        const allDocsQuery = query(moviesRef);
-        const allDocsSnapshot = await getDocs(allDocsQuery);
-        const allDocIds = allDocsSnapshot.docs.map(doc => doc.id);
-        
-      }
       
       snapshot.forEach((docSnap) => {
         idToDoc[docSnap.id] = docSnap.data();
